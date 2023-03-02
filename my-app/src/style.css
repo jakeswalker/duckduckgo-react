@@ -1,4 +1,4 @@
-body, nav, i, .accordion-item, .dropdown-toggle {
+body, .accordion-item {
   background-color: rgb(29, 28, 28);
   border-color: rgb(29, 28, 28);
   color: white;
@@ -7,7 +7,7 @@ body, nav, i, .accordion-item, .dropdown-toggle {
   background-color: rgb(51, 51, 51);
   color: white;
 }
-.collapse-horizontal {
+.sideMenu {
   height: 100vh!important;
   position: fixed;
   top: 0;
@@ -15,14 +15,13 @@ body, nav, i, .accordion-item, .dropdown-toggle {
   z-index: 1000;
   background-color: rgb(40, 40, 40);
 }
-.closeButton {
+.dropdown-toggle, .sideMenuOpen, .sideMenuClose {
+  background-color: transparent;
+  border-color: transparent;
+}
+.sideMenuClose {
   position: absolute;
   right: 0;
-}
-.sideMenuOpen, .sideMenuClose {
-  background-color: transparent;
-  border-color: rgb(29, 28, 28);
-  color: rgb(170, 170, 170);
 }
 .sideMenuTitles {
   font-size: 10px;
@@ -36,7 +35,7 @@ body, nav, i, .accordion-item, .dropdown-toggle {
   width: 190px;
   display: inline-block;
 }
-.form-control[type="text"]::placeholder, .search, .bi-search {
+.form-control[type="text"]::placeholder, .search {
   background-color: rgb(51, 51, 51);
   color: rgb(170, 170, 170);
 }
@@ -50,11 +49,7 @@ body, nav, i, .accordion-item, .dropdown-toggle {
   background-color: rgb(112, 142, 247);
   --bs-btn-border-color: rgb(112, 142, 247);
 }
-.smallFont {
-  font-size: 12px;
-}
 .card {
-  min-height: 310px;
   background-color: rgb(40, 40, 40);
 }
 .greenBG {
@@ -68,9 +63,6 @@ body, nav, i, .accordion-item, .dropdown-toggle {
   background-color: rgba(0, 0, 0, 0.5);
   --bs-btn-border-color: transparent;
 }
-.labMonster {
-  max-width: 60vw;
-}
 .accordion, .accordion-button {
   --bs-btn-border-color: transparent;
   --bs-accordion-border-color: rgb(29, 28, 28);
@@ -83,9 +75,6 @@ body, nav, i, .accordion-item, .dropdown-toggle {
 .form-control[type="text"], .accordion-button:focus {
   outline: none;
   box-shadow: none;
-}
-.cardImg {
-  min-height: 75px;
 }
 .dropdown-toggle::after {
   display: none !important;

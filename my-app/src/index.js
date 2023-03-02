@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
@@ -17,7 +17,6 @@ import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
 // Bootstrap Icons
 import { MegaphoneFill, ChevronDown, Twitter, Reddit, ChatLeftText, Envelope, List, X, Search, CheckCircleFill, ChevronCompactDown } from "react-bootstrap-icons";
-
 const TopMenu = () => (
   <Container fluid className="p-0">
     <Navbar className="justify-content-end py-4 ">
@@ -30,21 +29,86 @@ const TopMenu = () => (
             </Dropdown.Toggle>
             <Dropdown.Menu className="list-unstyled rounded-3 py-0 overflow-hidden">
               <Dropdown.Item className="text-white" href="#"><Twitter/> Twitter</Dropdown.Item>
-              <Dropdown.Item className="dropdown-item text-white" href="#"><Reddit/> Reddit</Dropdown.Item>
-              <Dropdown.Item className="dropdown-item text-white" href="#"><ChatLeftText/> Blog</Dropdown.Item>
-              <Dropdown.Item className="dropdown-item text-white" href="#"><Envelope/> Newsletter</Dropdown.Item>
+              <Dropdown.Item className="text-white" href="#"><Reddit/> Reddit</Dropdown.Item>
+              <Dropdown.Item className="text-white" href="#"><ChatLeftText/> Blog</Dropdown.Item>
+              <Dropdown.Item className="text-white" href="#"><Envelope/> Newsletter</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Nav.Link>
         <Nav.Link>
-          <Button variant="dark" className="sideMenuOpen py-0 px-sm-1 px-md-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSideMenu" aria-expanded="false" aria-controls="collapseSideMenu">
-            <List className="fs-5"/>
-          </Button>
+          <SideMenu/>
         </Nav.Link>
       </Nav>
     </Navbar>
   </Container>
 );
+function SideMenu() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button variant="dark" className="sideMenuOpen py-0 px-sm-1 px-md-2 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSideMenu" onClick={() => setOpen(!open)} aria-controls="collapseSideMenu" aria-expanded={open}>
+        <List className="fs-5"/>
+      </Button>>
+        <Collapse className="sideMenu overflow-scroll" in={open} dimension="width" id="collapseSideMenu">
+            <Card className="text-white m-0" body style={{ width: '205px' }}>
+              <Button variant="dark" className="sideMenuClose py-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSideMenu" onClick={() => setOpen(!open)} aria-controls="collapseSideMenu" aria-expanded={open}>
+                <X className="fs-2"/>
+              </Button>
+              <Row className="pb-3">
+                <Col>
+                  <div className="sideMenuTitles py-2">SETTINGS</div>
+                  <ul className="list-unstyled">
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Themes</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">All Settings</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">!Bang Search Shortcuts</a></li>
+                  </ul>
+                </Col>
+              </Row>
+              <Row className="pb-3">
+                <Col>
+                  <div className="sideMenuTitles py-2">PRIVACY ESSENTIALS</div>
+                  <ul className="list-unstyled">
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Private Search</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">App and Extension</a></li>
+                  </ul>
+                </Col>
+              </Row>
+              <Row className="pb-3">
+                <Col>
+                  <div className="sideMenuTitles py-2">WHY PRIVACY</div>
+                  <ul className="list-unstyled">
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Privacy Blog</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Privacy Newsletter</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Help Spread DuckDuckGo!</a></li>
+                  </ul>
+                </Col>
+              </Row>
+              <Row className="pb-3">
+                <Col>
+                  <div className="sideMenuTitles py-2">WHO WE ARE</div>
+                  <ul className="list-unstyled">
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">About Us</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Privacy Policy</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Careers</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Press Kit</a></li>
+                  </ul>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="sideMenuTitles py-2">KEEP IN TOUCH</div>
+                  <ul className="list-unstyled">
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Twitter</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Reddit</a></li>
+                    <li><a className="sideMenuLists text-decoration-none text-white" href="#">Help</a></li>
+                  </ul>
+                </Col>
+              </Row>
+            </Card>
+        </Collapse>
+    </>
+  );
+}
 const Logo = () => (
   <Row className="mx-0 mb-3">
     <Col>
@@ -73,7 +137,7 @@ const Info = () => (
         <li className="list-inline-item"><CheckCircleFill className="checkMark"/> Site Encryption</li>
       </ul>
       <Button variant="primary" type="button" className="addChrome1 text-white rounded-3 mt-2 py-2">Add DuckDuckGo to Chrome</Button>
-      <p className="smallFont mt-3">Trusted by tens of millions worldwide!</p>
+      <p className="mt-3" style={{fontSize: '12px'}}>Trusted by tens of millions worldwide!</p>
     </Col>
   </Row>
 );
@@ -86,9 +150,9 @@ const Cards = () => (
     </Row>
     <Row className="justify-content-center mx-0">
       <Col xs={7} sm={5} md={3} className="text-center mb-3">
-        <Card className="rounded-4 py-4">
+        <Card className="rounded-4 py-4" style={{minHeight: '310px'}}>
           <Card.Body>
-            <img className="cardImg mx-auto d-block mb-4" src="/laptop.svg" alt="A laptop."/>
+            <img className="mx-auto d-block mb-4" style={{minHeight: '75px'}} src="/laptop.svg" alt="A laptop."/>
               <h5 className="card-title"><strong>Privacy for Chrome</strong></h5>
               <p className="card-text">Browse as usual, and we'll take care of the rest. We bundled our search engine, tracker blocker, and encryption enforcer into one <a className="cardLinks text-decoration-none" href="#">Chrome
                 Extension</a>.</p>
@@ -96,18 +160,18 @@ const Cards = () => (
         </Card>
       </Col>
       <Col xs={7} sm={5} md={3}  className="text-center mb-3">
-        <Card className="rounded-4 py-4">
+        <Card className="rounded-4 py-4" style={{minHeight: '310px'}}>
           <Card.Body>
-            <img className="cardImg mx-auto d-block mb-4" src="/search.svg" alt="A magnifying glass."/>
+            <img className="mx-auto d-block mb-4" style={{minHeight: '75px'}} src="/search.svg" alt="A magnifying glass."/>
               <h5 className="card-title"><strong>Private Search Engine</strong></h5>
               <p className="card-text">Search privately with our app or extension, add private web search to your favorite browser, or search directly at <a className="cardLinks text-decoration-none" href="#">duckduckgo.com</a>.</p>
           </Card.Body>
         </Card>
       </Col>
       <Col xs={7} sm={5} md={3} className="text-center mb-3">
-        <Card className="rounded-4 py-4">
+        <Card className="rounded-4 py-4" style={{minHeight: '310px'}}>
           <Card.Body>
-            <img className="cardImg mx-auto d-block mb-4" src="/mobile.svg" alt="A mobile phone."/>
+            <img className="mx-auto d-block mb-4" style={{minHeight: '75px'}} src="/mobile.svg" alt="A mobile phone."/>
               <h5 className="card-title"><strong>Privacy Browswer App</strong></h5>
               <p className="card-text">Our private browser for mobile comes equipped with our search engine, tracker blocker, encryption enforcer, and more. Available on <a className="cardLinks text-decoration-none" href="#">iOS &
                 Android</a>.</p>
@@ -125,19 +189,19 @@ const GreenBackground = () => (
       <Button variant="dark" type="button" className="addChrome2 rounded-3 mt-2 py-2">Add DuckDuckGo to Chrome</Button>
     </Col>
     <Container>
-      <img className="labMonster img-fluid mx-auto d-block" src="/monster.svg" alt="A lab monster."/>
+      <img className="img-fluid mx-auto d-block" style={{ maxWidth: '60vw' }} src="/monster.svg" alt="A lab monster."/>
     </Container>
   </Row>
 );
 const FAQs = () => (
   <Container fluid className="p-0">
-    <Row className="justify-content-center">
+    <Row className="justify-content-center mx-0">
       <Col xs={11} sm={8} md={6} className="text-center">
         <h2 className="mt-5 py-5"><strong>Frequently Asked Questions</strong></h2>
         <hr/>
      </Col>
     </Row>
-    <Row className="row justify-content-center">
+    <Row className="row justify-content-center mx-0">
       <Col xs={11} sm={8} md={6}>
         <Accordion flush defaultActiveKey="0" className="text-white">
           <Accordion.Item eventKey="0">
@@ -207,7 +271,6 @@ const FAQs = () => (
     </Row>
   </Container>
 );
-
 const DuckDuckGo = () => (
   <Container fluid className="p-0">
     <TopMenu/>
@@ -219,6 +282,5 @@ const DuckDuckGo = () => (
     <FAQs/>
   </Container>
 );
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<DuckDuckGo/>);
